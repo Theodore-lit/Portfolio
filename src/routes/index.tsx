@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from 'framer-motion';
 import portrait from "@/assets/profil.png";
+import fintrack from "@/assets/projects/fintrack.png";
+import docSavvy from "@/assets/projects/docSavvy.png";
+import farm from "@/assets/projects/farm.png";
+import cityPlay from "@/assets/projects/cityPlay.png";
 import HeroText from "@/components/ui/typing";
 import StackMarquee from "@/components/stack/stackMarquee"
 import {
@@ -41,7 +45,7 @@ const projects = [
     desc: "Application de suivi financier avec synchronisation bancaire temps réel et insights IA.",
     year: "2026",
     link: "#",
-    img: "@assets/projects/fintrack.png",
+    img: fintrack,
   },
 
   {
@@ -50,7 +54,7 @@ const projects = [
     desc: "Solution numérique d’apprentissage médical aidant les étudiants à réviser efficacement grâce à des QCM, des cours et des analyses détaillées de progression.",
     year: "2026",
     link: "#",
-    img: "@assets/projects/docSavvy.png",
+    img: docSavvy,
   },
   {
     title: "Smart Farm",
@@ -58,7 +62,7 @@ const projects = [
     desc: "Solution intelligente de gestion agricole intégrant le suivi des cultures, la planification des tâches et l'analyse des données de production.",
     year: "2026",
     link: "#",
-    img: "@assets/projects/farm.png",
+    img: farm,
   },
   {
     title: "CityPlay",
@@ -66,7 +70,7 @@ const projects = [
     desc: "Application web gamifiée développée avec Laravel, intégrant des quiz, des énigmes et des parcours interactifs pour valoriser le patrimoine local.",
     year: "2026",
     link: "#",
-    img: "@assets/projects/cityPlay.png",
+    img: cityPlay,
   },
 ];
 
@@ -230,28 +234,60 @@ function Index() {
     >
             {projects.map((p) => (
               <motion.a
-                key={p.title}
-                href={p.link}
-                variants={cardVariants}
-                className="group relative p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all fade-in duration-300 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <span className="text-xs text-muted-foreground">{p.year}</span>
-                    <ArrowUpRight className="size-5 text-muted-foreground group-hover:text-primary group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-2">{p.title}</h3>
-                  <p className="text-sm text-primary mb-4">{p.tag}</p>
-                  <p className="text-muted-foreground leading-relaxed">{p.desc}</p>
-                </div>
-              </motion.a>
+  key={p.title}
+  href={p.link}
+  variants={cardVariants}
+  // 1. On ajoute 'group' pour les hovers et des styles de base
+  className="group relative p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden min-h-[300px] flex flex-col justify-end"
+>
+  {/* 2. L'image de fond */}
+  <img 
+    src={p.img} 
+    alt={p.title} 
+    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+  />
+
+  {/* 3. L'overlay sombre pour la lisibilité (Dégradé du noir vers le transparent) */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300 group-hover:opacity-95" />
+
+  {/* 4. Ton dégradé de couleur principal au Hover (Optionnel, pour garder ta touche de couleur) */}
+  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+  <span className="text-xs absolute top-0 right-0 text-gray-300 font-medium bg-black/40 px-2 py-1 rounded-md backdrop-blur-sm">
+        {p.year}
+      </span>
+
+  {/* 5. Le contenu textuel (Obligatoirement en 'relative' et 'z-10' pour passer AU-DESSUS de l'image) */}
+  <div className="relative z-10 w-full">
+    {/* <div className="flex items-start justify-between mb-4">
+    </div>
+     */}
+    <h3 className="text-2xl flex gap-3 font-semibold mb-2 text-white drop-shadow-md">
+      <span>{p.title}</span>
+      <ArrowUpRight className="size-5 text-gray-300 group-hover:text-primary group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+    </h3>
+    
+    <p className="text-sm text-primary font-medium mb-3">
+      {p.tag}
+    </p>
+    
+    <p className="text-gray-200 text-sm leading-relaxed line-clamp-2 drop-shadow-sm">
+      {p.desc}
+    </p>
+  </div>
+</motion.a>
             ))}
           </motion.div>
         </div>
       </section>
 
       <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-sm text-primary mb-2 uppercase tracking-widest">Compétences</p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-12">
+            Ma boîte de compétence
+          </h2>
+          </div>
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
           {[
             {
@@ -270,7 +306,7 @@ function Index() {
               desc: "Direction artistique, design system et prototypage Figma avant l'intégration.",
             },
           ].map((s) => (
-            <div key={s.title} className="p-8 rounded-2xl bg-card border border-border">
+            <div key={s.title} className="p-8 rounded-2xl bg-card border border-border transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-lg hover:shadow-primary/10 ">
               <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                 <s.icon className="size-6 text-primary" />
               </div>
@@ -352,7 +388,7 @@ function Index() {
       </section>
 
       <footer className="py-8 px-6 border-t border-border text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} — build with soin ❤ — Li't~dev.
+        © {new Date().getFullYear()} build with ❤ by Li't~dev.
       </footer>
     </div>
   );

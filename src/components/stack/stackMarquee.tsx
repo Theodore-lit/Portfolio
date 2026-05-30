@@ -10,7 +10,7 @@ export default function StackMarquee() {
   const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boolean }) => {
     return (
       <div className="w-full overflow-hidden py-2 select-none flex">
-        <div className={`flex gap-6 whitespace-nowrap min-w-full animate-[marquee_25s_linear_infinite] ${reverse ? '[animation-direction:reverse]' : ''}`}>
+        <div className={`flex gap-6 whitespace-nowrap min-w-full animate-marquee hover:pause ${reverse ? 'direction-reverse' : ''}`}>
           {/* Bloc 1 */}
           <div className="flex justify-around gap-6 min-w-full">
             {items.map((item, idx) => (
