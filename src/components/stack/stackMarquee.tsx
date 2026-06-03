@@ -4,7 +4,7 @@ import { GitBranch, Database, FileCode } from 'lucide-react';
 export default function StackMarquee() {
   const languages = ['JavaScript', 'TypeScript', 'PHP', 'Python', 'SQL', 'HTML', 'CSS'];
   const frameworks = ['Laravel', 'Vue.js', 'React', 'Node.js', 'Express', 'TailwindCSS'];
-  const tools = ['Git', 'MongoDB', 'PostgreSQL', 'Supabase', 'Docker', 'VS Code'];
+  const tools = ['Git/Github', 'MongoDB', 'PostgreSQL', 'Supabase', 'Renger', 'VS Code'];
 
   // Fonction utilitaire pour générer une ligne qui défile
   const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boolean }) => {
@@ -14,7 +14,7 @@ export default function StackMarquee() {
           {/* Bloc 1 */}
           <div className="flex justify-around gap-6 min-w-full">
             {items.map((item, idx) => (
-              <div key={`item-1-${idx}`} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border text-foreground font-medium shadow-[var(--shadow-elegant)]">
+              <div key={`item-1-${idx}`} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border text-foreground font-medium shadow-(--shadow-elegant)">
                 <span className="text-sm">{item}</span>
               </div>
             ))}
@@ -23,7 +23,7 @@ export default function StackMarquee() {
           {/* Bloc 2 (Doublure exacte pour l'effet infini) */}
           <div className="flex justify-around gap-6 min-w-full" aria-hidden="true">
             {items.map((item, idx) => (
-              <div key={`item-2-${idx}`} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border text-foreground font-medium shadow-[var(--shadow-elegant)]">
+              <div key={`item-2-${idx}`} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border text-foreground font-medium shadow-(--shadow-elegant)">
                 <span className="text-sm">{item}</span>
               </div>
             ))}
@@ -37,8 +37,8 @@ export default function StackMarquee() {
   return (
     <section className="py-16 bg-background overflow-hidden relative">
       {/* Effet d'ombrage fondu sur les côtés gauche et droit (comme sur ton image) */}
-      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-background to-transparent z-10 pointer-events-none" />
 
       {/* <div className="max-w-5xl mx-auto px-4 mb-10 text-center">
         <h2 className="text-3xl font-bold tracking-tight">Ma Stack Technique</h2>
@@ -64,12 +64,6 @@ export default function StackMarquee() {
           <MarqueeRow items={tools} />
         </div>
       </div>
-      <style>{`
-  @keyframes marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
-  }
-`}</style>
     </section>
   );
 }

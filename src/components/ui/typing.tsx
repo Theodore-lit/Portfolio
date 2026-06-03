@@ -3,7 +3,7 @@ import { TypeAnimation } from 'react-type-animation';
 export default function HeroText() {
   return (
     <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-      Je conçoit des{' '}
+      Je conçoit des <br />{' '}
       <TypeAnimation
         sequence={[
           'produits numériques.', // Premier texte
@@ -12,7 +12,7 @@ export default function HeroText() {
           2000,
           'interfaces élégantes.',
           2000,
-          'systèmes scalables.',
+          'systèmes intelligentes.',
           2000
         ]}
         wrapper="span"

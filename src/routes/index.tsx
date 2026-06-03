@@ -7,17 +7,39 @@ import farm from "@/assets/projects/farm.png";
 import cityPlay from "@/assets/projects/cityPlay.png";
 import HeroText from "@/components/ui/typing";
 import StackMarquee from "@/components/stack/stackMarquee"
+import { Textarea } from "@/components/ui/textarea.tsx";
+import aboutSmile from "@/assets/aboutSmile.png";
+import pro from "@/assets/pro.png";
 import {
   Github,
   Linkedin,
+  Facebook,
+  ChartAreaIcon,
   Mail,
   ArrowUpRight,
   Code2,
   Smartphone,
   Sparkles,
   MapPin,
+  Home,
+  Brain,
+  User,
+  FileArchive,
+  Menu,
+  X,
+  Backpack,
+  Send,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "recharts";
+
+import  React from "react";
+
+// const [isOpen, setOpenning] = useState(false)
+// const toggleMenu = () => {
+//   setOpenning(!isOpen);
+// }
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -77,23 +99,47 @@ const projects = [
 // des variables pour animer la grid de project
 // 1. On définit les règles de l'animation pour le parent et les enfants
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0.8 },
   visible: {
     opacity: 1,
     transition: {
       // Déclenche l'animation des enfants les uns après les autres (0.15s d'écart)
-      staggerChildren: 0.15, 
+      staggerChildren: 0.15,
     },
   },
 };
 
+const aboutText = {
+  hidden: { opacity: 0.5, x: 200, scale: 0.95 },
+  visible: {
+    opacity: 1, x: 0, scale: 1,
+    transition: {
+      duration: 1.5,
+      ease: [0.16, 1, 0.3, 1],// Équivalent d'un easeOut premium
+      delay: 0.2
+    },
+  }
+}
+const aboutImg = {
+  hidden: { opacity: 0, x: -200, scale: 0.95 },
+  visible: {
+    opacity: 1, x: 0, scale: 1,
+    transition: {
+      duration: 0.9,
+      ease: [0.16, 1, 0.3, 1] // Équivalent d'un easeOut premium
+    },
+  }
+}
+
+
+
 const cardVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 40 
+  hidden: {
+    opacity: 0.1,
+    y: 40
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
@@ -117,31 +163,65 @@ function Index() {
           <a href="#" className="font-semibold text-2xl tracking-tight text-primary">
             Port<span className="text-white">folio</span>
           </a>
-          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#work" className="hover:text-foreground transition-colors">
-              Projets
-            </a>
-            <a href="#stack" className="hover:text-foreground transition-colors">
-              Stack
-            </a>
-            <a href="#about" className="hover:text-foreground transition-colors">
-              À propos
-            </a>
-            <a href="#contact" className="hover:text-foreground transition-colors">
-              Contact
-            </a>
+          <div className="hidden md:flex items-center gap-9 text-sm text-muted-foreground">
+            <a href="#home" className="hover:text-foreground  flex gap-1 transition-colors">
+              <Home className="size-4" /><span> Accueil
+            </span></a>
+            <a href="#work" className="hover:text-foreground  flex gap-1 transition-colors">
+              <FileArchive className="size-4" /> <span>Projets
+            </span></a>
+            <a href="#about" className="hover:text-foreground flex gap-1  transition-colors">
+              <User className="size-4" /><span> À propos
+            </span></a>
+            <a href="#stack" className="hover:text-foreground flex gap-1  transition-colors">
+              <Backpack className="size-4" /> <span>Stack
+            </span></a>
           </div>
           <Button
             asChild
             size="sm"
-            className="bg-primary text-primary-foreground hover:bg-primary/90"
+            className="hidden md:flex bg-primary text-primary-foreground hover:bg-primary/90"
           >
             <a href="#contact">Travailler ensemble</a>
           </Button>
+          {/* if(!isOpen) { */}
+            <button
+            aschild
+            size="sm"
+            className="md:hidden"
+          >
+            <Menu className="size-5 text-white" />
+          </button>
+          {/* } else { */}
+          {/* <button
+            asChild
+            size="sm"
+            onClick={toggleMenu}
+            className="md:hidden"
+          >
+            <X className="size-5 text-white" />
+          </button>
+          } */}
         </nav>
+        {/* if (isOpen) { */}
+          <div className="md:hidden flex flex-col p-5 items-start gap-7 text-sm text-muted-foreground">
+            <a href="#home" className="hover:text-foreground flex gap-1 tex-lg transition-colors">
+              <Home className="size-3" /> <span>Accueil</span>
+            </a>
+            <a href="#work" className="hover:text-foreground flex gap-1 tex-lg transition-colors">
+              <FileArchive className="size-3" /> <span>Projets</span>
+            </a>
+            <a href="#about" className="hover:text-foreground flex gap-1 tex-lg transition-colors">
+              <User className="size-3" /> <span> À propos</span>
+            </a>
+            <a href="#stack" className="hover:text-foreground flex gap-1 tex-lg transition-colors">
+              <Backpack className="size-3" /> <span>Stack</span>
+            </a>
+          </div>
+        {/* } */}
       </header>
 
-      <section
+      <section id="home"
         className="relative pt-32 pb-24 px-6 overflow-hidden"
         style={{ backgroundImage: "var(--gradient-hero)" }}
       >
@@ -151,7 +231,7 @@ function Index() {
               <span className="size-2 rounded-full bg-primary animate-pulse" />
               Disponible pour de nouveaux projets
             </div>
-            <div className="min-h-50 my-3">
+            <div className="min-h-30 my-3">
               <HeroText />
             </div>
             <p className="mt-8 text-lg text-muted-foreground max-w-xl leading-relaxed">
@@ -174,41 +254,41 @@ function Index() {
             </div>
             <div className="mt-12 flex items-center gap-6 text-sm text-muted-foreground">
               <div>
-                <span className="text-foreground font-semibold text-xl">5+</span> ans d'expérience
+                <span className="text-foreground font-semibold text-xl">2+</span> ans d'expérience
               </div>
               <div className="h-8 w-px bg-border" />
               <div>
-                <span className="text-foreground font-semibold text-xl">40+</span> projets livrés
+                <span className="text-foreground font-semibold text-xl">10+</span> projets livrés
               </div>
               <div className="h-8 w-px bg-border" />
               <div className="flex items-center gap-1">
-                <MapPin className="size-3" /> Remote
+                <MapPin className="size-3" /> Cotonou - Benin
               </div>
             </div>
           </div>
-          <motion.div 
-      className="relative"
-      initial={{ opacity: 0, y: 40, scale: 0.95 }} // État de départ (invisible, plus bas, légèrement plus petit)
-      animate={{ opacity: 1, y: 0, scale: 1 }}     // État final (visible, à sa place, taille normale)
-      transition={{ 
-        duration: 0.8,                             // Durée de l'animation (0.8 seconde)
-        ease: [0.16, 1, 0.3, 1],                   // Courbe de vitesse "Custom Ease" ultra fluide (type out-expo)
-        delay: 0.2                                 // Petit délai pour laisser le reste de la page charger
-      }}
-    >
-      {/* Lueur d'arrière-plan */}
-      <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-transparent blur-3xl rounded-full" />
-      
-      {/* Conteneur de l'image */}
-      <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-border shadow-[var(--shadow-elegant)]">
-        <img 
-          src={portrait} 
-          alt="Portrait" 
-          className="w-full h-full object-cover" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-      </div>
-    </motion.div>
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0.1, y: 60, scale: 0.95 }} // État de départ (invisible, plus bas, légèrement plus petit)
+            animate={{ opacity: 1, y: 0, scale: 1 }}     // État final (visible, à sa place, taille normale)
+            transition={{
+              duration: 0.8,                             // Durée de l'animation (0.8 seconde)
+              ease: [0.16, 1, 0.3, 1],                   // Courbe de vitesse "Custom Ease" ultra fluide (type out-expo)
+              delay: 0.2                                 // Petit délai pour laisser le reste de la page charger
+            }}
+          >
+            {/* Lueur d'arrière-plan */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-transparent blur-3xl rounded-full" />
+
+            {/* Conteneur de l'image */}
+            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-[var(--shadow-elegant)]">
+              <img
+                src={portrait}
+                alt="Portrait"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -221,63 +301,96 @@ function Index() {
               </p>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Travaux récents</h2>
             </div>
-            <p className="text-muted-foreground hidden md:block max-w-sm">
+            {/* <p className="text-muted-foreground hidden md:block max-w-sm">
               Une sélection de produits que j'ai conçus et développés ces dernières années.
-            </p>
+            </p> */}
           </div>
-          <motion.div 
-      className="grid md:grid-cols-2 gap-6"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }} // Se déclenche dès que 10% de la grille est visible
-    >
+          <motion.div
+            className="grid md:grid-cols-2 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }} // Se déclenche dès que 10% de la grille est visible
+          >
             {projects.map((p) => (
               <motion.a
-  key={p.title}
-  href={p.link}
-  variants={cardVariants}
-  // 1. On ajoute 'group' pour les hovers et des styles de base
-  className="group relative p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden min-h-[300px] flex flex-col justify-end"
->
-  {/* 2. L'image de fond */}
-  <img 
-    src={p.img} 
-    alt={p.title} 
-    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-  />
+                key={p.title}
+                href={p.link}
+                variants={cardVariants}
+                // 1. On ajoute 'group' pour les hovers et des styles de base
+                className="group relative p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden min-h-75 flex flex-col justify-end"
+              >
+                {/* 2. L'image de fond */}
+                <img
+                  src={p.img}
+                  alt={p.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
 
-  {/* 3. L'overlay sombre pour la lisibilité (Dégradé du noir vers le transparent) */}
-  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300 group-hover:opacity-95" />
+                {/* 3. L'overlay sombre pour la lisibilité (Dégradé du noir vers le transparent) */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300 group-hover:opacity-95" />
 
-  {/* 4. Ton dégradé de couleur principal au Hover (Optionnel, pour garder ta touche de couleur) */}
-  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* 4. Ton dégradé de couleur principal au Hover (Optionnel, pour garder ta touche de couleur) */}
+                <div className="absolute inset-0 bg-linear-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-  <span className="text-xs absolute top-0 right-0 text-gray-300 font-medium bg-black/40 px-2 py-1 rounded-md backdrop-blur-sm">
-        {p.year}
-      </span>
+                <span className="text-xs absolute top-0 right-0 text-gray-300 font-medium bg-black/40 px-2 py-1 rounded-md backdrop-blur-sm">
+                  {p.year}
+                </span>
 
-  {/* 5. Le contenu textuel (Obligatoirement en 'relative' et 'z-10' pour passer AU-DESSUS de l'image) */}
-  <div className="relative z-10 w-full">
-    {/* <div className="flex items-start justify-between mb-4">
-    </div>
-     */}
-    <h3 className="text-2xl flex gap-3 font-semibold mb-2 text-white drop-shadow-md">
-      <span>{p.title}</span>
-      <ArrowUpRight className="size-5 text-gray-300 group-hover:text-primary group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
-    </h3>
-    
-    <p className="text-sm text-primary font-medium mb-3">
-      {p.tag}
-    </p>
-    
-    <p className="text-gray-200 text-sm leading-relaxed line-clamp-2 drop-shadow-sm">
-      {p.desc}
-    </p>
-  </div>
-</motion.a>
+                {/* 5. Le contenu textuel (Obligatoirement en 'relative' et 'z-10' pour passer AU-DESSUS de l'image) */}
+                <div className="relative z-10 w-full">
+                  <h3 className="text-2xl flex gap-3 font-semibold mb-2 text-white drop-shadow-md">
+                    <span>{p.title}</span>
+                    <ArrowUpRight className="size-5 text-gray-300 group-hover:text-primary group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+                  </h3>
+
+                  <p className="text-sm text-primary font-medium mb-3">
+                    {p.tag}
+                  </p>
+
+                  <p className="text-gray-200 text-sm leading-relaxed line-clamp-2 drop-shadow-sm">
+                    {p.desc}
+                  </p>
+                </div>
+              </motion.a>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      <section id="about" className="py-24 px-6 border-t max-h-170 border-border" style={{ backgroundImage: "var(--gradient-hero)" }}>
+        <div className="max-w-6xl mx-auto">
+          {/* <div className="text-center"> */}
+          <p className="text-sm text-center text-primary mb-8 uppercase tracking-widest">À propos</p>
+          {/* <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">Salut 👋</h2> */}
+          {/* </div> */}
+
+          <div className="grid md:grid-cols-2 items-center ">
+            <motion.div
+              variants={aboutImg}
+              initial="hidden"
+              whileInView='visible'
+              viewport={{ amount: 0.4 }}
+              className="flex justify-center">
+              <img src={aboutSmile} alt="photo" height="290px" width="230px" className="border text-center rounded-[50%] border-primary animate-pulse"
+              />
+            </motion.div>
+            <motion.div
+              variants={aboutText}
+              initial="hidden"
+              whileInView='visible'
+              viewport={{ once: true, amount: 0.4 }}
+            >
+              <span className="text-xl md:text-3xl font-bold tracking-tight pb-4 text-white">Salut 👋</span>
+              <p className="text-lg sm:pt-0 pt-10 md:pb-0 pb-8 text-muted-foreground leading-relaxed">
+                <span className="text-white font-semibold text-lg" >Je me nomme Theodore Lima <span className="text-primary" >alias Li't Dev</span>.</span> <br />
+                Je suis un développeur passionné par les beaux produits qui fonctionnent. Depuis 2 ans,
+                j'accompagne startups et entreprises dans la création d'expériences digitales, du
+                concept jusqu'au déploiement. <br /> Mon obsession : l'attention au détail, la performance et
+                le soin apporté à chaque interaction avec un esprit créatif.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -287,7 +400,7 @@ function Index() {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-12">
             Ma boîte de compétence
           </h2>
-          </div>
+        </div>
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
           {[
             {
@@ -323,68 +436,56 @@ function Index() {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-12">
             Ma Stack Technique
           </h2>
-
-<StackMarquee />
-
-          {/* <div className="grid md:grid-cols-4 gap-6">
-            {stack.map((s) => (
-              <div key={s.label} className="p-6 rounded-2xl bg-card border border-border">
-                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
-                  {s.label}
-                </p>
-                <ul className="space-y-2">
-                  {s.items.map((i) => (
-                    <li key={i} className="text-foreground">
-                      {i}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div> */}
+          <StackMarquee />
         </div>
       </section>
-
-      <section id="about" className="py-24 px-6 border-t border-border">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm text-primary mb-2 uppercase tracking-widest">À propos</p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">Bonjour 👋</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Je suis un développeur passionné par les beaux produits qui fonctionnent. Depuis 5 ans,
-            j'accompagne startups et entreprises dans la création d'expériences digitales, du
-            concept jusqu'au déploiement. Mon obsession : l'attention au détail, la performance et
-            le soin apporté à chaque interaction.
-          </p>
-        </div>
-      </section>
-
       <section id="contact" className="py-32 px-6 border-t border-border relative overflow-hidden">
         <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-hero)" }} />
-        <div className="relative max-w-3xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-            Un projet en tête ?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-10">
-            Discutons-en autour d'un café (virtuel ou non).
-          </p>
-          <Button
-            asChild
-            size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-[var(--shadow-glow)]"
-          >
-            <a href="mailto:hello@example.com">
-              <Mail className="mr-2 size-4" /> hello@example.com
-            </a>
-          </Button>
-          <div className="mt-10 flex items-center justify-center gap-6">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+        <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-8 text-center">
+          Un projet en tête ?
+        </h2>
+        
+        <div className="relative max-w-3xl mx-auto p-4">
+          <div className="grid md:grid-cols-2 gap-6" >
+            <div className="flex justify-center" >
+              <img src={pro} alt="photo"  className="border text-center shadow-lg border-muted-foreground rounded-lg"
+              />
+            </div>
+            <div>
+              <form action="" method="post">
+                <fieldset className="space-y-5 my-5">
+                  <h4 className="text-lg text-primary mb-5 text-start italic"> /* Laissez moi directement un message */</h4>
+                  <Input id="name" type="text" placeholder="Theodore" />
+                  <Input id="email" type="email" placeholder="theodore@gmail.com" />
+                  <Input id="tel" type="tel" placeholder="+2290154105484" />
+                  <Textarea id="message" placeholder="Votre message" />
+                  <Button type="submit">
+                    Envoyer
+                  </Button>
+                </fieldset>
+              </form>
+
+              <div className="mt-15 flex items-center justify-center gap-6">
+            <a href="https://github.com/Theodore-lit" className="text-muted-foreground hover:text-primary transition-colors">
               <Github className="size-5" />
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="https://www.facebook.com/people/Th%25C3%25A9odore-Lma/61561664421427/" className="text-muted-foreground hover:text-primary transition-colors">
+              <Facebook className="size-5" />
+            </a>
+            <a href="https://github.com/Theodore-lit" className="text-muted-foreground hover:text-primary transition-colors">
+              <Mail className="size-5" />
+            </a>
+            <a href="https://www.linkedin.com/in/théodore-lima-1331b8326" className="text-muted-foreground hover:text-primary transition-colors">
               <Linkedin className="size-5" />
             </a>
           </div>
+            </div>
+          </div>
+
         </div>
+        <div>
+        </div>
+        {/* <FormItem /> */}
       </section>
 
       <footer className="py-8 px-6 border-t border-border text-center text-sm text-muted-foreground">
