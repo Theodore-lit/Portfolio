@@ -37,10 +37,19 @@ export default function ContactForm() { // Majuscule à ContactForm (Convention 
     // 3. On passe la promesse à React Hot Toast
     toast.promise(sendEmailPromise, {
       loading: 'Envoi de votre message en cours...',
-      success: 'Message envoyé avec succès ! 🚀',
-      error: "Erreur lors de l'envoi. Veuillez réessayer. ❌",
+      success: 'Message envoyé avec succès !',
+      error: "Erreur lors de l'envoi. Veuillez réessayer.",
     });
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const { name, value } = e.target;
+  
+  setFormData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
 
   return (
     <> {/* Fragment React : Parent unique obligatoire */}
