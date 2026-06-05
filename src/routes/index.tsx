@@ -7,28 +7,17 @@ import farm from "@/assets/projects/farm.png";
 import cityPlay from "@/assets/projects/cityPlay.png";
 import HeroText from "@/components/ui/typing";
 import StackMarquee from "@/components/stack/stackMarquee"
+import Navbar from "@/components/partial/Navbar"
 import { Textarea } from "@/components/ui/textarea.tsx";
 import aboutSmile from "@/assets/aboutSmile.png";
-import pro from "@/assets/pro.png";
+import ContactForm from "@/components/partial/contactForm"
 import {
-  Github,
-  Linkedin,
-  Facebook,
-  ChartAreaIcon,
-  Mail,
   ArrowUpRight,
   Code2,
   Smartphone,
   Sparkles,
   MapPin,
-  Home,
-  Brain,
-  User,
-  FileArchive,
-  Menu,
-  X,
-  Backpack,
-  Send,
+  
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,10 +25,6 @@ import { Label } from "recharts";
 
 import  React from "react";
 
-// const [isOpen, setOpenning] = useState(false)
-// const toggleMenu = () => {
-//   setOpenning(!isOpen);
-// }
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -158,69 +143,7 @@ const stack = [
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border/50">
-        <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="font-semibold text-2xl tracking-tight text-primary">
-            Port<span className="text-white">folio</span>
-          </a>
-          <div className="hidden md:flex items-center gap-9 text-sm text-muted-foreground">
-            <a href="#home" className="hover:text-foreground  flex gap-1 transition-colors">
-              <Home className="size-4" /><span> Accueil
-            </span></a>
-            <a href="#work" className="hover:text-foreground  flex gap-1 transition-colors">
-              <FileArchive className="size-4" /> <span>Projets
-            </span></a>
-            <a href="#about" className="hover:text-foreground flex gap-1  transition-colors">
-              <User className="size-4" /><span> À propos
-            </span></a>
-            <a href="#stack" className="hover:text-foreground flex gap-1  transition-colors">
-              <Backpack className="size-4" /> <span>Stack
-            </span></a>
-          </div>
-          <Button
-            asChild
-            size="sm"
-            className="hidden md:flex bg-primary text-primary-foreground hover:bg-primary/90"
-          >
-            <a href="#contact">Travailler ensemble</a>
-          </Button>
-          {/* if(!isOpen) { */}
-            <button
-            aschild
-            size="sm"
-            className="md:hidden"
-          >
-            <Menu className="size-5 text-white" />
-          </button>
-          {/* } else { */}
-          {/* <button
-            asChild
-            size="sm"
-            onClick={toggleMenu}
-            className="md:hidden"
-          >
-            <X className="size-5 text-white" />
-          </button>
-          } */}
-        </nav>
-        {/* if (isOpen) { */}
-          <div className="md:hidden flex flex-col p-5 items-start gap-7 text-sm text-muted-foreground">
-            <a href="#home" className="hover:text-foreground flex gap-1 tex-lg transition-colors">
-              <Home className="size-3" /> <span>Accueil</span>
-            </a>
-            <a href="#work" className="hover:text-foreground flex gap-1 tex-lg transition-colors">
-              <FileArchive className="size-3" /> <span>Projets</span>
-            </a>
-            <a href="#about" className="hover:text-foreground flex gap-1 tex-lg transition-colors">
-              <User className="size-3" /> <span> À propos</span>
-            </a>
-            <a href="#stack" className="hover:text-foreground flex gap-1 tex-lg transition-colors">
-              <Backpack className="size-3" /> <span>Stack</span>
-            </a>
-          </div>
-        {/* } */}
-      </header>
-
+    <Navbar/>
       <section id="home"
         className="relative pt-32 pb-24 px-6 overflow-hidden"
         style={{ backgroundImage: "var(--gradient-hero)" }}
@@ -440,52 +363,7 @@ function Index() {
         </div>
       </section>
       <section id="contact" className="py-32 px-6 border-t border-border relative overflow-hidden">
-        <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-hero)" }} />
-        <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-8 text-center">
-          Un projet en tête ?
-        </h2>
-        
-        <div className="relative max-w-3xl mx-auto p-4">
-          <div className="grid md:grid-cols-2 gap-6" >
-            <div className="flex justify-center" >
-              <img src={pro} alt="photo"  className="border text-center shadow-lg border-muted-foreground rounded-lg"
-              />
-            </div>
-            <div>
-              <form action="" method="post">
-                <fieldset className="space-y-5 my-5">
-                  <h4 className="text-lg text-primary mb-5 text-start italic"> /* Laissez moi directement un message */</h4>
-                  <Input id="name" type="text" placeholder="Theodore" />
-                  <Input id="email" type="email" placeholder="theodore@gmail.com" />
-                  <Input id="tel" type="tel" placeholder="+2290154105484" />
-                  <Textarea id="message" placeholder="Votre message" />
-                  <Button type="submit">
-                    Envoyer
-                  </Button>
-                </fieldset>
-              </form>
-
-              <div className="mt-15 flex items-center justify-center gap-6">
-            <a href="https://github.com/Theodore-lit" className="text-muted-foreground hover:text-primary transition-colors">
-              <Github className="size-5" />
-            </a>
-            <a href="https://www.facebook.com/people/Th%25C3%25A9odore-Lma/61561664421427/" className="text-muted-foreground hover:text-primary transition-colors">
-              <Facebook className="size-5" />
-            </a>
-            <a href="https://github.com/Theodore-lit" className="text-muted-foreground hover:text-primary transition-colors">
-              <Mail className="size-5" />
-            </a>
-            <a href="https://www.linkedin.com/in/théodore-lima-1331b8326" className="text-muted-foreground hover:text-primary transition-colors">
-              <Linkedin className="size-5" />
-            </a>
-          </div>
-            </div>
-          </div>
-
-        </div>
-        <div>
-        </div>
-        {/* <FormItem /> */}
+      <ContactForm />
       </section>
 
       <footer className="py-8 px-6 border-t border-border text-center text-sm text-muted-foreground">

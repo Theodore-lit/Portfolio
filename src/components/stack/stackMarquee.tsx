@@ -10,9 +10,9 @@ export default function StackMarquee() {
   const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boolean }) => {
     return (
       <div className="w-full overflow-hidden py-2 select-none flex">
-        <div className={`flex gap-6 whitespace-nowrap min-w-full animate-marquee hover:pause ${reverse ? 'direction-reverse' : ''}`}>
+        <div className={`flex md:gap-6 gap-60 whitespace-nowrap min-w-full animate-marquee hover:pause ${reverse ? 'direction-reverse' : ''}`}>
           {/* Bloc 1 */}
-          <div className="flex justify-around gap-6 min-w-full">
+          <div className="flex justify-around gap-5 min-w-full">
             {items.map((item, idx) => (
               <div key={`item-1-${idx}`} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border text-foreground font-medium shadow-(--shadow-elegant)">
                 <span className="text-sm">{item}</span>
@@ -21,7 +21,7 @@ export default function StackMarquee() {
           </div>
 
           {/* Bloc 2 (Doublure exacte pour l'effet infini) */}
-          <div className="flex justify-around gap-6 min-w-full" aria-hidden="true">
+          <div className="flex justify-around gap-5 min-w-full" aria-hidden="true">
             {items.map((item, idx) => (
               <div key={`item-2-${idx}`} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border text-foreground font-medium shadow-(--shadow-elegant)">
                 <span className="text-sm">{item}</span>

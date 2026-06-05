@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from 'react-hot-toast';
 import {
   Outlet,
   Link,
@@ -101,6 +102,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <Toaster position="top-right" reverseOrder={false} />
         <Scripts />
       </body>
     </html>
