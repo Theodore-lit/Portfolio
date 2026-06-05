@@ -42,18 +42,6 @@ export default function ContactForm() { // Majuscule à ContactForm (Convention 
     });
   };
 
-  // 3. Soumission du formulaire
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormData({
-      nom: '',
-      email: '',
-      tel: '',
-      message: ''
-    })
-    // Prêt pour ton fetch / axios !
-  };
-
   return (
     <> {/* Fragment React : Parent unique obligatoire */}
       <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-hero)" }} />
@@ -70,7 +58,7 @@ export default function ContactForm() { // Majuscule à ContactForm (Convention 
             <img
               src={pro}
               alt="photo"
-              className="border text-center shadow-lg border-muted-foreground rounded-lg object-cover"
+              className="text-center shadow-lg rounded-lg object-cover"
             />
           </div>
 
