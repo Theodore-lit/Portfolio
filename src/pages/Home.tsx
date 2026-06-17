@@ -7,7 +7,6 @@ import cityPlay from "@/assets/projects/cityPlay.png";
 import HeroText from "@/components/ui/typing";
 import StackMarquee from "@/components/stack/stackMarquee";
 import Navbar from "@/components/partial/Navbar";
-import { Textarea } from "@/components/ui/textarea.tsx";
 import aboutSmile from "@/assets/aboutSmile.png";
 import ContactForm from "@/components/partial/contactForm";
 import { Helmet } from "react-helmet-async";
@@ -20,8 +19,6 @@ import {
   MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "recharts";
 
 import React from "react";
 
@@ -82,7 +79,7 @@ const aboutText = {
     scale: 1,
     transition: {
       duration: 1.5,
-      ease: [0.16, 1, 0.3, 1], // Équivalent d'un easeOut premium
+      ease: [0.16, 1, 0.3, 1] as const, // Équivalent d'un easeOut premium
       delay: 0.2,
     },
   },
@@ -95,7 +92,7 @@ const aboutImg = {
     scale: 1,
     transition: {
       duration: 0.9,
-      ease: [0.16, 1, 0.3, 1], // Équivalent d'un easeOut premium
+      ease: [0.16, 1, 0.3, 1] as const, // Équivalent d'un easeOut premium
     },
   },
 };
@@ -110,7 +107,7 @@ const cardVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.16, 1, 0.3, 1], // Équivalent d'un easeOut premium
+      ease: [0.16, 1, 0.3, 1] as const, // Équivalent d'un easeOut premium
     },
   },
 };
