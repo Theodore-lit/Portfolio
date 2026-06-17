@@ -19,7 +19,7 @@ export default function ContactForm() { // Majuscule à ContactForm (Convention 
   });
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
