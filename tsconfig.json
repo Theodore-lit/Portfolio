@@ -3,9 +3,9 @@
     "jsx": "react-jsx", 
     "ignoreDeprecations": "5.0",
     "types": ["vite/client"],
-    "baseUrl": ".",
+    "moduleResolution": "bundler", // <-- AJOUTE CELA pour autoriser les paths sans baseUrl
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"] // <-- Tu peux remettre le "./" sans problème ici
     }
   }
 }
